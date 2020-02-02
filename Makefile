@@ -8,8 +8,18 @@ WGET = wget -c --no-check-certificate
 
 
 
+.PHONY: all
+all: $(CWD)/bin/python3 ./$(MODULE).py
+	$^
+
+
+
 .PHONY: install
-install: debian
+install: debian $(CWD)/bin/python3 
+
+$(CWD)/bin/python3:
+	python3 -m venv .
+	$@ install -U pip
 
 .PHONY: debian
 debian:
